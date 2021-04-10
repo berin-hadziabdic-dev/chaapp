@@ -6,7 +6,21 @@ stages {
     stage("build")
     {
         steps{
-            echo 'hi from jenkins!'
+            pwd
+        }
+    }
+
+    stage("test")
+    {
+        steps {
+            echo "hi from jenkins during test"
+        }
+    }
+
+    stage("docker-deploy")
+    {
+        steps {
+            echo "hi from jenkin during docker deploy"
         }
     }
 }

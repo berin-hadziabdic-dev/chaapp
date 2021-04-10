@@ -6,8 +6,8 @@ stages {
     stage("build")
     {
         steps{
-            pwd
-            ls -l
+            sh 'pwd'
+            sh 'ls -l'
         }
     }
 

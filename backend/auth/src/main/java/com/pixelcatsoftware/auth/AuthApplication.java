@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableDiscoveryClient
 public class AuthApplication {
 
-	/**Jenkins test.*/
+	/**Jenkins test 2.*/
 	public static void main(String[] args) {
 		SpringApplication.run(AuthApplication.class, args);
 	}

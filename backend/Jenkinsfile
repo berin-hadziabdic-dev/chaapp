@@ -1,0 +1,8 @@
+pipeline {
+    agent any 
+
+    stage("build")
+    {
+        echo 'hi from jenkins!'
+    }
+}

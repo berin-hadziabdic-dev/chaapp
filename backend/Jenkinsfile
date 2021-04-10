@@ -6,7 +6,9 @@ stages {
     stage("build")
     {
         steps{
-            sh 'pwd'
+
+            sh 'cd backend'
+            sh 'echo "should print auth,gateway,and pom.xml!"'
             sh 'ls -l'
         }
     }
@@ -25,4 +27,16 @@ stages {
         }
     }
 }
+
+    post {
+        always {
+
+        }
+        success {
+
+        }
+        failure {
+
+        }
+    }
 }

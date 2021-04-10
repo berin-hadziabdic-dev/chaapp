@@ -30,16 +30,4 @@ stages {
         }
     }
 }
-
-    post {
-        always {
-
-        }
-        success {
-
-        }
-        failure {
-
-        }
-    }
 }

@@ -10,9 +10,7 @@ stages {
             sh 'cd backend'
             sh 'echo "should print auth,gateway,and pom.xml!"'
             sh 'ls -l'
-            sh 'mvn clean install'
-            sh 'cd auth'
-            sh 'mvn clean install'
+            sh 'mvn -f /backend/auth clean install'
         }
     }
 

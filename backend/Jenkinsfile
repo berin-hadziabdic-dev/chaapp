@@ -8,6 +8,7 @@ stages {
         steps{
             sh 'mvn -f ./backend/gateway/ clean install'
             sh 'docker build -t gateway_service ./backend/gateway/'
+            sh 'docker run -dp 7777:7777'
         }
     }
 

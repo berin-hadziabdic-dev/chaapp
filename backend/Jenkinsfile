@@ -6,10 +6,6 @@ stages {
     stage("build")
     {
         steps{
-
-            sh 'cd backend'
-            sh 'echo "should print auth,gateway,and pom.xml!"'
-            sh 'ls -l'
             sh 'mvn -f ./backend/gateway/ clean install'
             sh 'docker build -tag gateway_service ./backend/gateway/'
         }

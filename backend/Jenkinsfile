@@ -32,7 +32,7 @@ stages {
     stage("docker-run")
     {
         steps {
-            sh 'docker run -p 8761:8761 eureka_service &' 
+            sh 'docker run -dp 8761:8761 eureka_service' 
             sh 'docker run -p 7777:7777 gateway_service &'
             sh 'docker run -p 8888:8888 auth_service &'
         }

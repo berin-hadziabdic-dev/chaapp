@@ -3,30 +3,26 @@ pipeline {
 
 stages {
 
-    stage("build")
+    stage("clean install")
     {
         steps{
             sh 'mvn -f ./backend/gateway/ clean install'
-            sh 'mvn -f ./backend/auth/ clean install
-            '
-            sh 'docker build -t gateway_service ./backend/gateway/'
-            sh 'docker run gateway_service -dp 7777:7777'
-
-            sh 'docker build -t auth_service ./backend/auth/'
+            sh 'mvn -f ./backend/auth/ clean install'
         }
     }
 
-    stage("test")
+    stage("docker-build")
     {
         steps {
-            echo "hi from jenkins during test"
+            sh "docker build -t gateway_service ./backend/gateway/"
+            sh "docker build -t auth_service ./backend/auth/"
         }
     }
 
-    stage("docker-deploy")
+    stage("docker-run")
     {
         steps {
-            echo "hi from jenkin during docker deploy"
+            sh "docker run gateway_service -dp 7777:7777"
         }
     }
 }

@@ -12,6 +12,14 @@ stages {
         }
     }
 
+    stage("docker-clean")
+    {
+        steps 
+        {
+            sh 'docker stop $(docker ps -a -q)'
+        }
+    }
+
     stage("docker-build")
     {
         steps {

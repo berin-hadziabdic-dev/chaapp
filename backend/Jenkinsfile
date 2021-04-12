@@ -14,15 +14,15 @@ stages {
     stage("docker-build")
     {
         steps {
-            sh "docker build -t gateway_service ./backend/gateway/"
-            sh "docker build -t auth_service ./backend/auth/"
+            sh 'docker build -t gateway_service ./backend/gateway/'
+            sh 'docker build -t auth_service ./backend/auth/'
         }
     }
 
     stage("docker-run")
     {
         steps {
-            sh "docker run gateway_service -dp 7777:7777"
+            sh 'docker run gateway_service -dp 7777:7777'
         }
     }
 }

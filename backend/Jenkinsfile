@@ -6,6 +6,7 @@ stages {
     stage("clean install")
     {
         steps{
+            sh 'mvn -f ./backend/eureka/ clean install'
             sh 'mvn -f ./backend/gateway/ clean install'
             sh 'mvn -f ./backend/auth/ clean install'
         }
@@ -14,6 +15,7 @@ stages {
     stage("docker-build")
     {
         steps {
+            sh 'docker build -t eureka_service ./backend/eureka/'
             sh 'docker build -t gateway_service ./backend/gateway/'
             sh 'docker build -t auth_service ./backend/auth/'
         }
@@ -22,7 +24,9 @@ stages {
     stage("docker-run")
     {
         steps {
-            sh 'docker run gateway_service -dp 7777:7777'
+            sh 'docker -p 8761:8761 run eureka_service' 
+            sh 'docker -p 7777:7777 run gateway_service'
+            //sh 'docker run gateway_service -dp 7777:7777'
         }
     }
 }

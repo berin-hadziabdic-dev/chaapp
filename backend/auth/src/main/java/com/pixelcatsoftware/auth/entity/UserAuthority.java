@@ -21,10 +21,6 @@ public class UserAuthority implements GrantedAuthority  {
 
     @Column(nullable = false)
     private String username;
-
-    @Column(nullable=false,insertable = false,updatable = false)
-    Integer authority_key;
-
     @JoinColumn(name="authority_key",referencedColumnName = "authority_id")
     @OneToOne
     private Authority authority;

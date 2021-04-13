@@ -80,13 +80,11 @@ public class LoginSecurity extends WebSecurityConfigurerAdapter{
             .and()
             .addFilterAfter(this.loginFilter, SecurityContextPersistenceFilter.class)
                 .authorizeRequests()
-                 .antMatchers("/auth")
-                 .hasAnyAuthority("registered_user", "email_verified_user")
+                 .antMatchers("/auth").hasAnyAuthority("verified", "not_verified")
                  .and()
                  .authorizeRequests()
-                 .antMatchers("/auth**")
-                 .authenticated();
-                
+                 .antMatchers("/auth/messages**","/auth/profile**").hasAuthority("verified")
+                 .antMatchers("/auth/lo**").hasAuthority("verified");              
         
     }
 

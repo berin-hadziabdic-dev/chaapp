@@ -70,21 +70,21 @@ public class CustomLoginFilter extends GenericFilterBean {
      
             body = IOUtils.toString(request.getReader());
             bodyCredentials = getDtoFromBody(body);
-            if(!bodyCredentials.isInvalid())
+
+            if(bodyCredentials != null)
             {
                 usersCredentials = new UsernamePasswordAuthenticationToken(bodyCredentials.getUsername(),bodyCredentials.getPassword());        
                 authManagerReturnedAuthentication = this.loginManager.authenticate(usersCredentials);
+                    
                 if(authManagerReturnedAuthentication.isAuthenticated())
                 {
                     SecurityContextHolder.getContext().setAuthentication(authManagerReturnedAuthentication);
                     httpServletResponse.setStatus(200);
                 }
-                else
-                {
-                    throw new AuthenticationCredentialsNotFoundException("Username and password combination not found");
-                }
-            }
-        }
+          }
+     }
+            
+   
         
         chain.doFilter(request, response);
     }
@@ -97,7 +97,7 @@ public class CustomLoginFilter extends GenericFilterBean {
         }
         catch(Exception e)
         {
-            throw new AuthenticationCredentialsNotFoundException("Unable to authenticate due to empty body.");
+            returnDto = null;
         }
         return returnDto;
     }

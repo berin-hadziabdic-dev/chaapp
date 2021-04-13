@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 @EnableJpaRepositories
 @SpringBootApplication
-@EnableDiscoveryClient
+//@EnableDiscoveryClient
 public class AuthApplication {
 
 	/**Jenkins test 4 hook should be posting now.!!*/

@@ -10,9 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
+import com.profile_messages.profile_messages.dto.ContactDetailsDto;
 
-@Data
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor
 @Entity(name="contact_details")
 @Table(name="contact_details")
 public class ContactDetails {
@@ -23,4 +26,9 @@ public class ContactDetails {
     @JoinColumn(name="contact_username", referencedColumnName = "username")
     @ManyToOne(fetch=FetchType.EAGER)
     private Profile connectedUser;
+
+    public ContactDetails(ContactDetailsDto dto)
+    {
+        this.connectedUser = new Profile(dto.getContactDetails());
+    }
 }

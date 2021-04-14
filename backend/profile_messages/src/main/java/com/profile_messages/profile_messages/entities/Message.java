@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.profile_messages.profile_messages.dto.MessageDto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
+@Data @NoArgsConstructor
 @Entity(name="message")
 @Table(name="message")
 public class Message {
@@ -20,4 +22,12 @@ public class Message {
     
     @Column(insertable=true,updatable=false,nullable=false)
     String sender_username;
+
+    public Message(MessageDto dto)
+    {
+        this.id = dto.getId();
+        this.conversation_id = dto.getConversation_id();
+        this.message = dto.getMessage();
+        this.sender_username = dto.getSender_username();
+    }
 }

@@ -12,6 +12,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.profile_messages.profile_messages.dto.ProfileDto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor
 @Entity(name="profile")
 @Table(name="profile")
 public class Profile 
@@ -26,5 +32,16 @@ public class Profile
     private Integer phone_number;
     @JoinColumn(name="username",referencedColumnName = "owning_username")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<ContactDetails> contacts; 
+    private List<ContactDetails> contacts; 
+    @JoinColumn(name="username", referencedColumnName = "owning_username")
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<ConversationRecord> usersConversations;
+
+    public Profile(ProfileDto dto)
+    {
+        this.username = dto.getUsername();
+        this.email = dto.getEmail();
+        this.area_code = dto.getArea_code();
+        this.phone_number = dto.getPhone_number();
+    }
 }

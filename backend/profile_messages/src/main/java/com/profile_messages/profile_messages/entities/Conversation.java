@@ -10,12 +10,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import lombok.Data;
 
-@Data
+import com.profile_messages.profile_messages.dto.ConversationDto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data @NoArgsConstructor
 @Entity(name="conversation")
 @Table(name="conversation")
 public class Conversation 
@@ -26,10 +29,17 @@ public class Conversation
     @JoinColumn(name="conversation_id",referencedColumnName = "conversation_id")
     @OneToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Message> messages;
-    @JoinColumn(name="user_one", referencedColumnName="username",updatable=false,nullable=true)
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Profile userOneProfile;
-    @JoinColumn(name="user_two", referencedColumnName="username",updatable=false,nullable=true)
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Profile userTwoProfile;
+   
+    private String user_one;
+    private String user_two;
+    
+    /** This constructor is only invoked when creating a new conversation. 
+     * @param dto the dto to create the Conversation from.
+     */
+    public Conversation(ConversationDto dto)
+    {
+        this.user_one = dto.getUser_one();
+        this.user_two = dto.getUser_two();
+        this.messages = null;
+    }
 }

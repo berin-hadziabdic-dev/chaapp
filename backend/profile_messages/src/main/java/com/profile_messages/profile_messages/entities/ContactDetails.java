@@ -22,8 +22,9 @@ public class ContactDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
-  
-    @JoinColumn(name="contact_username", referencedColumnName = "username")
+    @Column(nullable = false, updatable = false, insertable = true)
+    private String owning_username;
+    @JoinColumn(name="contact_username",referencedColumnName = "username")
     @ManyToOne(fetch=FetchType.EAGER)
     private Profile connectedUser;
 

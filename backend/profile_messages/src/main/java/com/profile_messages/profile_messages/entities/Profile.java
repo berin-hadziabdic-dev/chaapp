@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.profile_messages.profile_messages.dto.ProfileDto;
 
@@ -30,9 +31,11 @@ public class Profile
     private Integer area_code;
     @Column(nullable=false,updatable=true,insertable=true)
     private Integer phone_number;
+    @Transient
     @JoinColumn(name="username",referencedColumnName = "owning_username")
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ContactDetails> contacts; 
+    @Transient
     @JoinColumn(name="username", referencedColumnName = "owning_username")
     @OneToMany(fetch = FetchType.LAZY)
     private List<ConversationRecord> usersConversations;

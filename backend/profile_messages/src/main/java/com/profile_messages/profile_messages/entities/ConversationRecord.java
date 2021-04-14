@@ -2,8 +2,10 @@ package com.profile_messages.profile_messages.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.profile_messages.profile_messages.dto.ConversationRecordDto;
@@ -24,6 +26,7 @@ public class ConversationRecord {
     @Column(nullable = false,updatable = false)
     private String owning_username;
     @JoinColumn(name="conversation_id",referencedColumnName = "conversation_id")
+    @ManyToOne(fetch = FetchType.LAZY)
     private Conversation storedConversation;
 
     public ConversationRecord(ConversationRecordDto dto,Conversation convo)

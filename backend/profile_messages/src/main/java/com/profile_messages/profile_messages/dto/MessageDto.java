@@ -1,29 +1,26 @@
 package com.profile_messages.profile_messages.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 import com.profile_messages.profile_messages.entities.Message;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@EqualsAndHashCode
 public class MessageDto {
-    @NotNull @Min(0)
-    private Integer id;
-    @NotNull 
-    private String message;
-    @NotNull
-    private Integer conversation_id;
-    @NotNull @NotBlank    
-    String sender_username;
 
-    public MessageDto(Message message)
+    private Integer id;
+    private String message;
+    private Integer chat_id;
+    private String sender_username;
+
+    public MessageDto(Message msg)
     {
-        this.id = message.getId();
-        this.conversation_id = message.getConversation_id();
-        this.message = message.getMessage();
-        this.sender_username = message.getSender_username();
+        this.id = msg.getId();
+        this.message = msg.getMessage();
+        this.chat_id = msg.getChat_id();
+        this.sender_username = msg.getSender_username();
     }
 }

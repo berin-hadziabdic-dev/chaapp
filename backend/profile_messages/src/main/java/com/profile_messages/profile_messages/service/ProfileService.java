@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @Service
 public class ProfileService {
     
     private ProfileRepository profileRepo;
+
 
     public ProfileService(ProfileRepository repository)
     {
@@ -23,7 +23,7 @@ public class ProfileService {
     }
 
 
-    private Profile findProfile(String username)
+    public Profile findProfile(String username)
     {
         Profile returnProfile = null;
         Optional<Profile> userProfile = this.profileRepo.findById(username);

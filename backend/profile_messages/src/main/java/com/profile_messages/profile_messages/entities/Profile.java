@@ -31,14 +31,12 @@ public class Profile
     private Integer area_code;
     @Column(nullable=false,updatable=true,insertable=true)
     private Integer phone_number;
-    @Transient
-    @JoinColumn(name="username",referencedColumnName = "owning_username")
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ContactDetails> contacts; 
-    @Transient
-    @JoinColumn(name="username", referencedColumnName = "owning_username")
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<ConversationRecord> usersConversations;
+    @OneToMany
+    @JoinColumn(name="owning_username",referencedColumnName = "username")
+    List<ProfileContact> contacts;
+    @OneToMany
+    @JoinColumn(referencedColumnName = "username",name = "owning_username")
+    List<AllowedChatter> usersChats; // contains list of chats user is permitted to participatein,
 
     public Profile(ProfileDto dto)
     {

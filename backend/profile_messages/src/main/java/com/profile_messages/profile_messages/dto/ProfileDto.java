@@ -3,12 +3,11 @@ package com.profile_messages.profile_messages.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.profile_messages.profile_messages.entities.ContactDetails;
 import com.profile_messages.profile_messages.entities.Profile;
-
 import lombok.Data;
 
 @Data
@@ -22,8 +21,8 @@ public class ProfileDto {
     private Integer area_code;
     @NotNull
     private Integer phone_number;
-    @NotNull
-    private List<ContactDetailsDto> contacts;
+
+   
 
     public ProfileDto(Profile profile)
     {
@@ -32,9 +31,5 @@ public class ProfileDto {
         this.area_code = profile.getArea_code();
         this.phone_number = profile.getPhone_number();
 
-        this.contacts = new ArrayList<ContactDetailsDto>();
-
-        for(ContactDetails contact: profile.getContacts())
-            this.contacts.add(new ContactDetailsDto(contact));
     }
 }

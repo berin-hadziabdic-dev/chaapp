@@ -4,22 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.JoinColumn;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.profile_messages.profile_messages.entities.Profile;
+
+import org.springframework.validation.annotation.Validated;
+
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Data
+
+@NoArgsConstructor
+@EqualsAndHashCode
 public class ProfileDto {
 
-    @NotNull @NotBlank
     private String username;
-    @NotNull @NotBlank
     private String email;
-    @NotNull
     private Integer area_code;
-    @NotNull
     private Integer phone_number;
 
    

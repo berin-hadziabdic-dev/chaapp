@@ -31,7 +31,7 @@ public class MessageService {
     public void addMessageToNewChat(Chat newlyCreatedChat,String username, MessageDto newChat)
     {
         this.chatService.findChatForUser(username, newlyCreatedChat.getChat_id());// ensure user can access chat
-        Message newlyCreatedMessage = new Message(username,newChat);
+        Message newlyCreatedMessage = new Message(newChat);
         this.messageRepo.save(newlyCreatedMessage);
     }
 

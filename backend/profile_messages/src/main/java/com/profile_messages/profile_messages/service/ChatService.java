@@ -81,7 +81,7 @@ public class ChatService {
     public boolean userCanSendMessagesInChat(String username, Integer chat_id)
     {
         Chat discoveredChat = this.findChat(chat_id);
-        boolean userCanAccessChat = true;
+        boolean userCanAccessChat = false;
 
         //go thrrough allowed participants and if a matching username is not found throw an exception which will return a 400
         for(AllowedChatter chatter: discoveredChat.getAllowedParticipants())

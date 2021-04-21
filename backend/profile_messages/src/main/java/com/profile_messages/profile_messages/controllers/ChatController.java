@@ -46,6 +46,7 @@ public class ChatController {
     @GetMapping(path="/{username}/{chat_id}")
     public ResponseEntity<ChatDto> getChatForUser(@Valid @NotNull @NotBlank @PathVariable String username,@Valid @NotNull @NotBlank @PathVariable Integer chat_id)
     {
+        this.profileService.findProfile(username);//attempt to find profile. Throw exception if it does not exist.
         Chat discoveredChat = this.chatService.findChatForUser(username, chat_id);
         ChatDto returnData = new ChatDto(discoveredChat);
 
@@ -58,6 +59,7 @@ public class ChatController {
     public void sendMessage(@Valid @NonNull @NotBlank @PathVariable String username ,@Valid @NonNull @NotBlank @RequestBody MessageDto dto)
     {
         this.validateUsername(username, dto.getSender_username()); //ensure dto and session username match
+        this.profileService.findProfile(username); //will throw exception if profile does not exist.
         this.chatService.userCanSendMessagesInChat(username,dto.getChat_id()); //ensure user can send messeges in said chat.
         this.messageService.addMessageToExistingChat(username,dto); // add the message to the chat.
     }
@@ -65,7 +67,7 @@ public class ChatController {
     /**This api endpoint attempts to create a new chat between two users. */
     @PostMapping(path="/new/{sender}/{reciever}")
     @ResponseStatus(HttpStatus.OK)
-    public void createNewAndSendMessage(@Valid @NotBlank @NotNull @PathVariable String sender, @Valid @NotBlank @NotNull @PathVariable String reciever,MessageDto dto)
+    public void createNewAndSendMessage(@Valid @NotBlank @NotNull @PathVariable String sender, @Valid @NotBlank @NotNull @PathVariable String reciever,@RequestBody MessageDto dto)
     {
         validateUsername(sender, dto.getSender_username()); //ensure the sender is sending a message on the behalf of themselves.
         this.profileService.findProfile(sender);

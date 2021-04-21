@@ -1,5 +1,7 @@
 package com.profile_messages.profile_messages.matchers;
 
+import com.profile_messages.profile_messages.exceptions.BadRequestException;
+
 import org.springframework.stereotype.Service;
 
 import lombok.NoArgsConstructor;
@@ -8,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StringMatcher {
 
-    public boolean match(String one,String two)
+    public boolean match(String one,String two) throws BadRequestException
     {
         boolean retval = false;
 

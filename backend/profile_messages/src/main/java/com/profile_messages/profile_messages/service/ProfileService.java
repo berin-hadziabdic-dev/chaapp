@@ -5,22 +5,21 @@ import java.util.Optional;
 import com.profile_messages.profile_messages.dto.ProfileDto;
 import com.profile_messages.profile_messages.entities.Profile;
 import com.profile_messages.profile_messages.exceptions.BadRequestException;
+import com.profile_messages.profile_messages.matchers.StringMatcher;
 import com.profile_messages.profile_messages.repositories.ProfileRepository;
 
 import org.springframework.stereotype.Service;
 
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class ProfileService {
     
     private ProfileRepository profileRepo;
+    private StringMatcher matcher;
 
-
-    public ProfileService(ProfileRepository repository)
-    {
-        this.profileRepo = repository;
-    }
 
 
     public Profile findProfile(String username)
@@ -52,9 +51,12 @@ public class ProfileService {
        this.profileRepo.delete(deleteProfile);
    }
 
-   public void createProfile(String username, ProfileDto dto)
+   public void createProfile(String username, ProfileDto dto) throws BadRequestException
    {
        boolean badRequestExceptionThrown = false;
+
+       if(!this.matcher.match(username, dto.getUsername()))
+          throw new BadRequestException("The user attempted to create a profile for username that is not equal to their session username.");
     
        try 
        {

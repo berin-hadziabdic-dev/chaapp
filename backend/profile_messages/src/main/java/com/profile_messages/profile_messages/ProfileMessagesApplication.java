@@ -11,6 +11,7 @@ public class ProfileMessagesApplication {
 
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(ProfileMessagesApplication.class, args);
 	}
 }
